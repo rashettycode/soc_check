@@ -45,6 +45,26 @@
             margin-top: 20px;
             color: #4a4a8a;
         }
+        .task {
+            flex: 2;
+        }
+        .month {
+            flex: 1;
+            text-align: right;
+            color: #4a4a8a;
+        }
+        .download-btn {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4a4a8a;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -52,28 +72,66 @@
     <div class="container">
         <h1>SOC Type 1 Checklist Dashboard</h1>
 
+        <!-- Overall Security Controls -->
         <h2>Overall Security Controls</h2>
         <ul>
-            <li><input type="checkbox"> Review and assess the design of security controls</li>
-            <li><input type="checkbox"> Evaluate the implementation of security controls</li>
-            <li><input type="checkbox"> Test the operating effectiveness of security controls</li>
-            <li><input type="checkbox"> Review and update security controls based on industry best practices and regulatory requirements</li>
+            <li>
+                <span class="task">Review and assess the design of security controls</span>
+                <span class="month">September 2024</span>
+                <input type="checkbox">
+            </li>
+            <li>
+                <span class="task">Evaluate the implementation of security controls</span>
+                <span class="month">October 2024</span>
+                <input type="checkbox">
+            </li>
+            <li>
+                <span class="task">Test the operating effectiveness of security controls</span>
+                <span class="month">November 2024</span>
+                <input type="checkbox">
+            </li>
+            <li>
+                <span class="task">Review and update security controls based on industry best practices and regulatory requirements</span>
+                <span class="month">December 2024</span>
+                <input type="checkbox">
+            </li>
         </ul>
 
-        <h2>Information Security Policy</h2>
-        <ul>
-            <li><input type="checkbox"> Review and assess the organization's information security policy</li>
-            <li><input type="checkbox"> Conduct penetration testing to identify potential vulnerabilities</li>
-            <li><input type="checkbox"> Monitor and analyze security logs for suspicious activity</li>
-        </ul>
+        <!-- Add other sections here as needed -->
 
-        <h2>Access Controls</h2>
-        <ul>
-            <li><input type="checkbox"> Regularly review and update access rights and permissions</li>
-            <li><input type="checkbox"> Implement multi-factor authentication for sensitive systems</li>
-            <li><input type="checkbox"> Review and assess access control mechanisms</li>
-        </ul>
+        <!-- PDF Download Button -->
+        <button class="download-btn" onclick="downloadPDF()">Download Checklist as PDF</button>
     </div>
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add the checklist content to the PDF
+            doc.setFontSize(18);
+            doc.text("SOC Type 1 Checklist Dashboard", 105, 20, null, null, 'center');
+
+            // Set font size for section headers
+            doc.setFontSize(14);
+
+            // Example: Adding a section header and tasks
+            doc.text("Overall Security Controls", 10, 40);
+            doc.setFontSize(12);
+            doc.text("- Review and assess the design of security controls [September 2024]", 10, 50);
+            doc.text("- Evaluate the implementation of security controls [October 2024]", 10, 60);
+            doc.text("- Test the operating effectiveness of security controls [November 2024]", 10, 70);
+            doc.text("- Review and update security controls based on industry best practices [December 2024]", 10, 80);
+
+            // Additional checklist sections can be added here
+
+            // Save the PDF
+            doc.save('soc_type_1_checklist.pdf');
+        }
+    </script>
 
 </body>
 </html>
+
